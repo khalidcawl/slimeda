@@ -1,10 +1,9 @@
 import altair as alt
 import pandas as pd
 
-def histogram(df, columns, path=""):
+def histogram(df, columns):
     """
-    Creates histogram chart objects for specific columns in a data frame and optionally saves
-    the charts to a user-specific path
+    Creates histogram chart objects for specific columns in a data frame
     Parameters
     ----------
     df: pd.DataFrame
