@@ -35,7 +35,7 @@ def miss_counts(df, keyword=None, sparse=False, ascending=False):
     initial_data = []
     for i in df.columns.values.tolist():
         initial_data.append([i,df[i].isna().sum()+len(df.loc[df[i]==keyword])])
-    results = pd.DataFrame(a,columns=["Columns","Counts"])
+    results = pd.DataFrame(initial_data,columns=["Columns","Counts"])
 
     # Calculate the percentage
     results["percentage"] = results["Counts"]/len(df)
