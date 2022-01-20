@@ -2,14 +2,14 @@ import numpy as np
 import pandas as pd
 from slimeda.histogram import histogram
 import pytest
+from vega_datasets import data
 
 def test_histogram_single_chart():
     """Tests that a single chart is created for a single column"""
-    rng = np.random.default_rng()
 
     # create a dummy data frame with four columns for testing
-    df = pd.DataFrame(rng.integers(0, 100, size=(100, 4)), columns=list('ABCD'))
-    charts = histogram(df, ["A"])
+    df = data.cars()
+    charts = histogram(df, ["Cylinders"])
     assert charts != None
     assert len(charts) == 1
     assert charts[0] != None
@@ -18,11 +18,10 @@ def test_histogram_single_chart():
 
 def test_histogram_multiple_charts():
     """Tests that multiple charts are created for multiple columns"""
-    rng = np.random.default_rng()
 
     # create a dummy data frame with four columns for testing
-    df = pd.DataFrame(rng.integers(0, 100, size=(100, 4)), columns=list('ABCD'))
-    charts = histogram(df, ["A", "B", "C"])
+    df = data.cars()
+    charts = histogram(df, ["Cylinders", "Miles_per_Gallon", "Horsepower"])
     assert charts != None
     assert len(charts) == 3
     for chart in charts:
@@ -38,13 +37,12 @@ def test_histogram_invalid_dataframe():
 def test_histogram_no_columns():
     """Tests that function throws an error when no columns are specified"""
     with pytest.raises(ValueError):
-        rng = np.random.default_rng()
-        df = pd.DataFrame(rng.integers(0, 100, size=(100, 4)), columns=list('ABCD'))
+        df = data.cars()
         histogram(df, [])
 
 def test_histogram_wrong_column():
     """Tests that function throws an error when user specifies an incorrect column name"""
     with pytest.raises(ValueError):
         rng = np.random.default_rng()
-        df = pd.DataFrame(rng.integers(0, 100, size=(100, 4)), columns=list('ABCD'))
-        histogram(df, ["E"])
+        df = data.cars()
+        histogram(df, ["Fake_column"])
