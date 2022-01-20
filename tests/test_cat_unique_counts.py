@@ -4,6 +4,19 @@ import pandas as pd
 import numpy as np
 import pytest
 
+df1 = pd.DataFrame(data = [['Jessica' ,10, "cook"],
+                            ['Tom', 12, "swim"],
+                            ['Clarke', 1, "cook"]], 
+                    columns=['Name', 'Age' ,"Hobby"])
+
+df2 = pd.DataFrame(data = [["Alex", 10, '3'],
+                            ["Alex", 19, '1'],
+                            ["Clark", 31, '2'],
+                            ["Plark", 17, '2']],
+                    columns=['Name','Age', 'Rate'])
+
+df3 = pd.DataFrame( columns=['Name', 'Age', 'Rate'])
+
 def df_sample():
     """Sample dataset"""
     # generate random date
@@ -24,27 +37,20 @@ def df_sample():
 
     df = pd.DataFrame(data = [date_col, numbers_col, animal_col, str_date_col])
 
-    df1 = pd.DataFrame(data = [['Jessica',10,"cook"],
-                        ['Tom',12,"swim"],
-                        ['Clarke',1,"football"]], 
-                        columns=['Name','Age',"Hobby"])
+    return df.T
 
-    df2 = pd.DataFrame(data = [['Alex', 10, '3'],
-                                ["Marry", 19, '1'],
-                                ['Clarke', 1, '4']], 
-                           columns=['Name','Age', "Rate"])
-
-    df3 = pd.DataFrame( columns=['Name','Age', "Rate"])
-
-    return (df.T,df1, df2, df3)
-
-def test_cat_unique_counts():
+def test_cat_unique_counts_values():
     """Unit test for unique counts of values in categorical features."""
+    result1 = list(cat_unique_counts(df1).iloc[:, 1])
+    result2 = list(cat_unique_counts(df2).iloc[:, 1])
+    result3 = cat_unique_counts(df3)
 
-    df1 = df_sample()[1]
-    df2 = df_sample()[2]
-    df3 = df_sample()[3]
+    assert result1  == [3, 2]
+    assert result2  == [3]
+    assert result3  == None
 
+def test_cat_unique_counts_features():
+    """Unit test for categorical features in dataframe."""
     result1 = list(cat_unique_counts(df1).iloc[:, 0])
     result2 = list(cat_unique_counts(df2).iloc[:, 0])
     result3 = cat_unique_counts(df3)
@@ -55,7 +61,7 @@ def test_cat_unique_counts():
     
 # bad input
 @pytest.mark.parametrize(
-    "input", 
+    "all_input", 
     [
         pd.Series(data= {'a': 1, 'b': 2, 'c': 3}, index=['x', 'y', 'z']),
         np.array([[1, 2], [3, 4]]),
@@ -65,10 +71,8 @@ def test_cat_unique_counts():
         df_sample()
     ]
 )
-def test_cat_unique_counts_bad_input(bad_input):
+def test_cat_unique_counts_all_input(all_input):
     """Accepts parameters and raise errors when parameter is of wrong instance"""
     with pytest.raises(TypeError):
-        cat_unique_counts(input)
-
-
+        cat_unique_counts(all_input)
 
