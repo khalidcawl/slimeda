@@ -1,5 +1,5 @@
 from slimeda.corr_map import corr_map
-import numpy as np
+import altair as alt
 import pandas as pd
 from vega_datasets import data
 import pytest
