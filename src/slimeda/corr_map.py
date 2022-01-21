@@ -15,6 +15,7 @@ def corr_map(df, columns):
         the file path indicating where the image is stored
         by default it would store at the current working directory
 
+
     Returns
     -------
     Chart
@@ -66,3 +67,4 @@ def corr_map(df, columns):
         color=alt.Color("corr", scale=alt.Scale(scheme="purpleorange", domain=(-1, 1))),
     )
     return corr_chart
+

@@ -4,27 +4,42 @@ Exploratory Data Analysis is an important preparatory work to help data scientis
 
 Slimeda focuses on unique value and missing value counts, as well as making graphs like histogram and correlation graphs. Also, the generated results are designed as charts or images, which will help users more flexibly reference their EDA results.
 
+## Function Specification
+
+The package is under developement and includes the following functions:
+
+- **histogram** : This function accepts a dataframe and builds histograms for all numeric columns which are returned 
+as an array of chart objects. The user has the option to save the image to path.
+
+- **corr_map** : This function accepts a dataframe and builds an heat map for all numeric columns which is returned 
+as a chart object. The user has the option to save the image to path.
+
+- **cat_unique_count** : This function accepts a dataframe and returns a table of unique value counts for all categorical columns.
+
+- **miss_counts** : This function accepts a dataframe and returns a table of counts of missing values in all columns.
+
+Limitations:
+We only consider numeric and categorical columns in our package.
+
 ## Installation
 
 ```bash
 $ pip install slimeda
 ```
-## Functions
-- Merged with Taiwo's pr.
 ## Usage
 
 - To do (will complete this part in milestone2)
 
+
 ## Fitting in Python Ecosystem
-- The packages have similar functions are:
-    - [numpy](https://numpy.org/): can count unique value and missing value
+- Packages have similar functions are:
+    -  [numpy](https://numpy.org/): can count unique value and missing value
     - [pandas-profiling](https://pandas-profiling.github.io/pandas-profiling/docs/master/rtd/): can generate basic eda reports.
-
 - Slimeda's innovation points:
-    - Compared with packages with massive functions, we focus on eda and simplify the code.
-    - Compared with numpy, we extracted specific functions needed in eda and also optimize the output to be more clear.
-    - Compared with pandas-profiling, we generate the most commonly used graphs and make possible for png outputs, which is much more flexible for users to get their eda results.
 
+    - We aggregate necessary functions for eda in one function that can only be done with multiple packages and simplify the code. For example, for missing value counts, we not only get the counts but also calculate its percentage.
+    - Compared with numpy, we optimize the output to be more clear.
+    - Compared with pandas-profiling, we generate the most commonly used graphs and make possible for png outputs, which is much more flexible for users to get their eda results.
 ## Contributing
 
 Interested in contributing? Check out the contributing guidelines. Please note that this project is released with a Code of Conduct. By contributing to this project, you agree to abide by its terms.
