@@ -24,7 +24,7 @@ We only consider numeric and categorical columns in our package.
 ## Installation
 
 ```bash
-$ pip install slimeda
+$ pip install git+https://github.com/UBC-MDS/slimeda
 ```
 ## Usage
 
