@@ -59,6 +59,8 @@ jobs:
           git config user.email github-actions@github.com
           semantic-release publish
     # Step 5. Publish to TestPyPI
+    - name: Build package with poetry
+      run: poetry build
     - uses: pypa/gh-action-pypi-publish@release/v1
       with:
         user: __token__
